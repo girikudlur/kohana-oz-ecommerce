@@ -53,8 +53,10 @@ CREATE TABLE `products` (
   `quantity` mediumint(8) unsigned DEFAULT NULL,
   `primary_photo_id` int(10) unsigned DEFAULT NULL,
   `avg_review_rating` decimal(3,1) unsigned DEFAULT NULL,
+  `visible` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `quantity` (`quantity`)
+  KEY `quantity` (`quantity`),
+  KEY `visible` (`visible`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 DROP TABLE IF EXISTS `product_categories`;
