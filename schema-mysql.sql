@@ -1,6 +1,5 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned DEFAULT NULL,
@@ -31,7 +30,6 @@ CREATE TABLE `orders` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `order_products`;
 CREATE TABLE `order_products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` int(10) unsigned NOT NULL,
@@ -43,7 +41,6 @@ CREATE TABLE `order_products` (
   KEY `order_id` (`order_id`,`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -59,7 +56,6 @@ CREATE TABLE `products` (
   KEY `visible` (`visible`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `product_categories`;
 CREATE TABLE `product_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -70,7 +66,6 @@ CREATE TABLE `product_categories` (
   KEY `parent_id` (`parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `product_categories_products`;
 CREATE TABLE `product_categories_products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(10) unsigned NOT NULL,
@@ -80,7 +75,6 @@ CREATE TABLE `product_categories_products` (
   KEY `fk_category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `product_photos`;
 CREATE TABLE `product_photos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(10) unsigned NOT NULL,
@@ -90,7 +84,6 @@ CREATE TABLE `product_photos` (
   KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `product_reviews`;
 CREATE TABLE `product_reviews` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(10) unsigned NOT NULL,
@@ -104,7 +97,7 @@ CREATE TABLE `product_reviews` (
   KEY `date` (`date`),
   KEY `rating` (`rating`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-DROP TRIGGER IF EXISTS `avg_review_rating_ins`;
+
 DELIMITER //
 CREATE TRIGGER `avg_review_rating_ins` AFTER INSERT ON `product_reviews`
  FOR EACH ROW BEGIN
@@ -113,7 +106,7 @@ CREATE TRIGGER `avg_review_rating_ins` AFTER INSERT ON `product_reviews`
 END
 //
 DELIMITER ;
-DROP TRIGGER IF EXISTS `avg_review_rating_up`;
+
 DELIMITER //
 CREATE TRIGGER `avg_review_rating_up` AFTER UPDATE ON `product_reviews`
  FOR EACH ROW BEGIN
@@ -122,7 +115,7 @@ CREATE TRIGGER `avg_review_rating_up` AFTER UPDATE ON `product_reviews`
 END
 //
 DELIMITER ;
-DROP TRIGGER IF EXISTS `avg_review_rating_del`;
+
 DELIMITER //
 CREATE TRIGGER `avg_review_rating_del` AFTER DELETE ON `product_reviews`
  FOR EACH ROW BEGIN
@@ -132,7 +125,6 @@ END
 //
 DELIMITER ;
 
-DROP TABLE IF EXISTS `product_specifications`;
 CREATE TABLE `product_specifications` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(10) unsigned NOT NULL,
@@ -142,7 +134,6 @@ CREATE TABLE `product_specifications` (
   KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `product_variations`;
 CREATE TABLE `product_variations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(10) unsigned NOT NULL,
@@ -153,7 +144,6 @@ CREATE TABLE `product_variations` (
   KEY `quantity` (`quantity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `vouchers`;
 CREATE TABLE `vouchers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
