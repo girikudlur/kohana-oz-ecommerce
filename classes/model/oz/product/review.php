@@ -16,7 +16,7 @@ abstract class Model_Oz_Product_Review extends ORM {
 	protected $_table_columns = array(
 		'id'         => array('type' => 'int'),
 		'product_id' => array('type' => 'int'),
-		'date'       => array('type' => 'date'),
+		'date'       => array('type' => 'string'),
 		'name'       => array('type' => 'string'),
 		'rating'     => array('type' => 'int'),
 		'summary'    => array('type' => 'string'),
