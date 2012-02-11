@@ -14,12 +14,14 @@ abstract class Model_Oz_Order_Product extends ORM {
 	);
 
 	protected $_table_columns = array(
-		'id'           => array('type' => 'int'),
-		'order_id'     => array('type' => 'int'),
-		'product_id'   => array('type' => 'int'),
-		'variation_id' => array('type' => 'int'),
-		'quantity'     => array('type' => 'int'),
-		'price'        => array('type' => 'float'),
+		'id'             => array('type' => 'int'),
+		'order_id'       => array('type' => 'int'),
+		'product_id'     => array('type' => 'int'),
+		'product_name'   => array('type' => 'string'),
+		'variation_id'   => array('type' => 'int'),
+		'variation_name' => array('type' => 'string'),
+		'quantity'       => array('type' => 'int'),
+		'price'          => array('type' => 'float'),
 	);
 
 	public function rules()
@@ -35,8 +37,14 @@ abstract class Model_Oz_Order_Product extends ORM {
 				array('digit'),
 				array('gt', array(':value', 0)),
 			),
+			'product_name' => array(
+				array('not_empty'),
+			),
 			'variation_id' => array(
 				array('digit'),
+			),
+			'variation_name' => array(
+				array('not_empty'),
 			),
 			'quantity' => array(
 				array('not_empty'),
@@ -61,6 +69,18 @@ abstract class Model_Oz_Order_Product extends ORM {
 	{
 		if ($this->loaded())
 			throw new Kohana_Exception('existing order products can not be modified');
+
+		$this->product_name = DB::select('name')
+			->from('products')
+			->where('id', '=', $this->product_id)
+			->execute()
+			->get('name');
+
+		$this->variation_name = DB::select('name')
+			->from('product_variations')
+			->where('id', '=', $this->variation_id)
+			->execute()
+			->get('name');
 
 		return parent::save($validation);
 	}
