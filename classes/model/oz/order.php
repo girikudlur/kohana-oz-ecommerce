@@ -169,6 +169,16 @@ abstract class Model_Oz_Order extends ORM {
 	}
 
 	/**
+	 * Calculate how much VAT/tax is being paid on this order
+	 *
+	 * @return  float
+	 */
+	public function vat_amount()
+	{
+		return ($this->amount(TRUE) / 100) * $this->vat_rate;
+	}
+
+	/**
 	 * Allows you to update the "status" of an existing order
 	 *
 	 * @param   string  $status
