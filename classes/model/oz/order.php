@@ -137,16 +137,17 @@ abstract class Model_Oz_Order extends ORM {
 	}
 
 	/**
-	 * Calculates the total price (excluding VAT) of all products within the
-	 * order and the shipping cost, rounded to 2 decimal places.
+	 * Calculates the total price of all products within the order and
+	 * the shipping cost, rounded to 2 decimal places.
 	 *
 	 * If $apply_discount is true, then the value of the 'discount' property
 	 * shall be deducted from the above result.
 	 *
 	 * @param   bool  $apply_discount
+	 * @param   bool  $include_vat
 	 * @return  float
 	 */
-	public function amount($apply_discount = TRUE)
+	public function amount($apply_discount = TRUE, $include_vat = FALSE)
 	{
 		$amount = $this->shipping_price;
 		foreach ($this->products->find_all() as $product)
@@ -157,6 +158,11 @@ abstract class Model_Oz_Order extends ORM {
 		if ($apply_discount)
 		{
 			$amount -= $this->discount;
+		}
+
+		if ($include_vat AND $this->vat_rate > 0)
+		{
+			$amount *= 1 + ($this->vat_rate / 100);
 		}
 
 		return round(max(0, $amount), 2);
