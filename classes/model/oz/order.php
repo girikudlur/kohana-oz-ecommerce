@@ -22,6 +22,7 @@ abstract class Model_Oz_Order extends ORM {
 		'status'               => array('type' => 'string'),
 		'payment_method'       => array('type' => 'string'),
 		'shipping_price'       => array('type' => 'float'),
+		'shipping_method'      => array('type' => 'string'),
 		'vat_rate'             => array('type' => 'float'),
 		'discount'             => array('type' => 'float'),
 		'email'                => array('type' => 'string'),
