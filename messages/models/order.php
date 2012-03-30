@@ -17,7 +17,7 @@ return array(
 		'not_empty' => 'Billing address 1 is required',
 	),
 	'billing_addr3' => array(
-		'not_empty' => 'Billing address 2 is required',
+		'not_empty' => 'Billing address city is required',
 	),
 	'billing_postal_code' => array(
 		'not_empty'      => 'Billing postal code is required',
@@ -34,8 +34,8 @@ return array(
 	'shipping_addr1' => array(
 		'not_empty' => 'Shipping address 1 is required',
 	),
-	'shipping_addr2' => array(
-		'not_empty' => 'Shipping address 2 is required',
+	'shipping_addr3' => array(
+		'not_empty' => 'Shipping address city is required',
 	),
 	'shipping_postal_code' => array(
 		'not_empty'      => 'Shipping postal code is required',
