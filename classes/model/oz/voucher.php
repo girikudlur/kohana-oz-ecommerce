@@ -93,6 +93,9 @@ abstract class Model_Oz_Voucher extends ORM {
 		}
 		catch(Exception $e) {}
 
+		// Ensure we have a float, and also removes any % sign the user may have added
+		$this->percentage = abs($this->percentage);
+
 		return parent::save($validation);
 	}
 
