@@ -67,7 +67,7 @@ class Oz_Payment_Sagepay_Form {
 	public function url()
 	{
 		if ($this->_development)
-			return 'https://test.sagepay.com/Simulator/VSPFormGateway.asp';
+			return 'https://test.sagepay.com/gateway/service/vspform-register.vsp';
 
 		return 'https://live.sagepay.com/gateway/service/vspform-register.vsp';
 	}
