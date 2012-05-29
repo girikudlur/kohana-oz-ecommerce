@@ -118,8 +118,8 @@ class Oz_Payment_Sagepay_Form {
 		list($d_firstname, $d_lastname) = array_pad(explode(' ', $order->shipping_name, 2), 2, 'unknown');
 
 		$crypt_data = array(
-			'VendorTxCode'       => uniqid('paym_', TRUE),
-			'VendorEmail'        => $this->_vendor_email, 
+			'VendorTxCode'       => uniqid($order->pk().'-'),
+			'VendorEmail'        => $this->_vendor_email,
 
 			'Amount'             => $amount,
 			'Currency'           => trim($locale_info['int_curr_symbol']),
