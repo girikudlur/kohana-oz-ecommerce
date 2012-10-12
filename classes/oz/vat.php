@@ -22,11 +22,17 @@ class Oz_VAT {
 	 * Returns the given price inclusive of VAT
 	 *
 	 * @param   mixed  $price
+	 * @param   float  $vat_rate
 	 * @return  float
 	 */
-	static public function price($price)
+	static public function price($price, $vat_rate = NULL)
 	{
-		return $price * (1 + (self::rate() / 100));
+		if ( ! $vat_rate)
+		{
+			$vat_rate = self::rate();
+		}
+
+		return $price * (1 + ($vat_rate / 100));
 	}
 
 }
