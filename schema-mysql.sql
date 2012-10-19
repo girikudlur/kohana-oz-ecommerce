@@ -4,6 +4,7 @@ CREATE TABLE `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned DEFAULT NULL,
   `date` datetime NOT NULL,
+  `reference` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'new',
   `payment_method` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `shipping_price` decimal(6,2) unsigned NOT NULL DEFAULT '0.00',
@@ -27,6 +28,7 @@ CREATE TABLE `orders` (
   `shipping_country` char(2) COLLATE utf8_unicode_ci NOT NULL,
   `notes` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `reference` (`reference`),
   KEY `status` (`status`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
