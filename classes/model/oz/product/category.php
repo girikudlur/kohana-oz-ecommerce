@@ -22,6 +22,7 @@ abstract class Model_Oz_Product_Category extends ORM {
 		'description' => array('type' => 'string'),
 		'order'       => array('type' => 'int'),
 		'parent_id'   => array('type' => 'int'),
+		'image'       => array('type' => 'string'),
 	);
 
 	public function rules()
@@ -38,6 +39,9 @@ abstract class Model_Oz_Product_Category extends ORM {
 				array('digit'),
 				array('gt', array(':value', 0)),
 			),
+			'image' => array(
+				array('is_file'),
+			),
 		);
 	}
 
@@ -47,6 +51,31 @@ abstract class Model_Oz_Product_Category extends ORM {
 			'name'        => array(array('trim')),
 			'description' => array(array('trim')),
 		);
+	}
+
+	/**
+	 * Overload ORM::delete() to provide additional logic.
+	 *
+	 * @return  mixed
+	 */
+	public function delete()
+	{
+		$image = $this->image;
+		$foo = parent::delete();
+
+		if ($image AND file_exists($image))
+		{
+			try
+			{
+				unlink($image);
+			}
+			catch (Exception $e)
+			{
+				Kohana::$log->add(Log::WARNING, $e->getMessage());
+			}
+		}
+
+		return $foo;
 	}
 
 	/**
